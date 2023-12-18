@@ -3,7 +3,6 @@ package org.computerworkshop.universityproject.service;
 import lombok.AllArgsConstructor;
 import org.computerworkshop.universityproject.data.model.Student;
 import org.computerworkshop.universityproject.data.repository.StudentRepository;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,11 +24,8 @@ public class StudentDatabaseService implements StudentService{
     }
 
     @Override
-    public Student update(long id, Student newStudent) throws ChangeSetPersister.NotFoundException {
-//        Optional<Student> studentToFind = this.findOne(id);
-//        studentToFind = Optional.ofNullable(newStudent);
-//        this.save(studentToFind);
-        return null;
+    public Student update(long id, Student newStudent)  {
+        return studentRepository.save(newStudent);
     }
 
     @Override
