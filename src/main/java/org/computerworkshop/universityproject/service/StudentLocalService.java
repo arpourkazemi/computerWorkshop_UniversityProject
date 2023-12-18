@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @NoArgsConstructor
@@ -21,12 +22,12 @@ public class StudentLocalService implements StudentService{
     }
 
     @Override
-    public Student findOne(long id) throws ChangeSetPersister.NotFoundException {
+    public Optional<Student> findOne(long id) throws ChangeSetPersister.NotFoundException {
         Student oneToFind = null;
         for (Student student : students) {
             if (student.getId() == id) {
                 oneToFind = student;
-                return oneToFind;
+                return Optional.of(oneToFind);
             }
         }
         throw new ChangeSetPersister.NotFoundException();
@@ -34,13 +35,6 @@ public class StudentLocalService implements StudentService{
 
     @Override
     public Student update(long id, Student newStudent) throws ChangeSetPersister.NotFoundException {
-//        for (Student student : students) {
-//            if (student.getId() == id) {
-//                delete(id);
-//                student = newStudent;
-//                return student;
-//            }
-//        }
         for (int i = 0; i < students.size(); i++){
             if (students.get(i).getId() == id){
                 students.set(i, newStudent);
