@@ -3,11 +3,8 @@ package org.computerworkshop.universityproject.controller;
 import lombok.AllArgsConstructor;
 import org.computerworkshop.universityproject.data.model.Student;
 import org.computerworkshop.universityproject.service.StudentLocalService;
-import org.computerworkshop.universityproject.service.StudentService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,5 +22,20 @@ public class StudentController {
     @PostMapping()
     public Student save(Student student){
         return studentLocalService.save(student);
+    }
+
+    @GetMapping("/{id}")
+    public Student findOne(@PathVariable long id) throws ChangeSetPersister.NotFoundException {
+        return studentLocalService.findOne(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable long id) throws ChangeSetPersister.NotFoundException {
+        studentLocalService.delete(id);
+    }
+
+    @PutMapping("/{id}")
+    public Student update(@PathVariable long id, @RequestBody Student newStudent) throws ChangeSetPersister.NotFoundException {
+        return studentLocalService.update(id, newStudent);
     }
 }

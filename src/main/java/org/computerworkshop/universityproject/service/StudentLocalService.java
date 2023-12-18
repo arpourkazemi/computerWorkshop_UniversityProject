@@ -24,17 +24,28 @@ public class StudentLocalService implements StudentService{
     public Student findOne(long id) throws ChangeSetPersister.NotFoundException {
         Student oneToFind = null;
         for (Student student : students) {
-            if (student.getId() == id) oneToFind = student;
-            return oneToFind;
+            if (student.getId() == id) {
+                oneToFind = student;
+                return oneToFind;
+            }
         }
         throw new ChangeSetPersister.NotFoundException();
     }
 
     @Override
     public Student update(long id, Student newStudent) throws ChangeSetPersister.NotFoundException {
-        for (Student student : students) {
-            if (student.getId() == id) student = newStudent;
-            return student;
+//        for (Student student : students) {
+//            if (student.getId() == id) {
+//                delete(id);
+//                student = newStudent;
+//                return student;
+//            }
+//        }
+        for (int i = 0; i < students.size(); i++){
+            if (students.get(i).getId() == id){
+                students.set(i, newStudent);
+                return newStudent;
+            }
         }
         throw new ChangeSetPersister.NotFoundException();
     }
@@ -48,8 +59,10 @@ public class StudentLocalService implements StudentService{
     @Override
     public void delete(long id) throws ChangeSetPersister.NotFoundException {
         for (Student student : students) {
-            if (student.getId() == id) students.remove(student);
-            return;
+            if (student.getId() == id) {
+                students.remove(student);
+                return;
+            }
         }
         throw new ChangeSetPersister.NotFoundException();
     }
