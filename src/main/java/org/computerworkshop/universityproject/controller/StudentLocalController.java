@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/students")
+@RequestMapping("/api/v1/local/students")
 public class StudentLocalController {
     private StudentLocalService studentLocalService;
 
